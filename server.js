@@ -4,9 +4,9 @@ var net = require('net');
 // Define variables
 var client;                 // The iPhone app
 var timer;                  // Used to time sending new samples
-var numberChannels = 64;    // The number of channels to simulate
+var numberChannels = 3 ;    // The number of channels to simulate
 var startTime = Date.now(); // Used to get time t for sine waves
-var frequency = 10;         // The frequency to send samples at
+var frequency = 50;         // The frequency to send samples at
 
 // Setup Server
 var server = net.createServer( function(socket) {
@@ -56,9 +56,8 @@ function startTimer() {
     client.write(stringy);
     client.write('\0');
 
-  // How often the timer fires is set to the sampling interval,
-  // which is the inverse of the sampling frequency
-  }, 1/frequency);
+  // How often the timer fires is set to the sampling interval in ms
+  }, 1000/frequency);
 }
 
 // Don't forget to start the server now that we're all setup.
