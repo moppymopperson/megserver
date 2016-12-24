@@ -8,6 +8,12 @@ app.get('/', function(req, res){
   res.send('moppy megserver');
 });
 
+// This is necessary for using socket.io on Heroku
+io.configure(function () {
+  io.set("transports", ["xhr-polling"]);
+  io.set("polling duration", 10);
+});
+
 // This is called when a client connects
 io.on('connection', function(socket){
   console.log('connected client');
