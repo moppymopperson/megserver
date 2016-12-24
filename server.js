@@ -9,10 +9,10 @@ app.get('/', function(req, res){
 });
 
 // This is necessary for using socket.io on Heroku
-io.configure(function () {
-  io.set("transports", ["xhr-polling"]);
-  io.set("polling duration", 10);
-});
+// io.configure(function () {
+//   io.set("transports", ["xhr-polling"]);
+//   io.set("polling duration", 10);
+// });
 
 // This is called when a client connects
 io.on('connection', function(socket){
