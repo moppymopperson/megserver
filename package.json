@@ -1,0 +1,27 @@
+{
+  "name": "megserver",
+  "version": "0.8.0",
+  "description": "Streams simulated data arrays that emulate EEG or MEG type signals.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moppymopperson/megserver.git"
+  },
+  "keywords": [
+    "TCP",
+    "EEG",
+    "MEG"
+  ],
+  "author": "Erik Hornberger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moppymopperson/megserver/issues"
+  },
+  "homepage": "https://github.com/moppymopperson/megserver#readme",
+  "dependencies": {
+    "net": "^1.0.2"
+  }
+}
