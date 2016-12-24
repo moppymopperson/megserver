@@ -1,34 +1,51 @@
-// The TCP Server requires the net package
-var net = require('net');
+var app = require('express')();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var port = process.env.PORT || 8080;
+
+// When a user visits the website
+app.get('/', function(req, res){
+  res.send('moppy megserver');
+});
+
+// This is called when a client connects
+io.on('connection', function(socket){
+  console.log('connected client');
+  client = socket;
+  startTimer();
+
+  // Make the session timeout after 10s automatically
+  const sessionTimeout = 10;
+  setTimeout(function(){
+    clearInterval(timer);
+    endSession();
+  }, sessionTimeout*1000);
+});
+
+// Log the session statistics when the user disconnects
+io.on('disconnect', function(socket){
+  console.log('user disconnected!')
+  endSession();
+});
+
+http.listen(port, function(){
+  console.log('begin listening for connections');
+});
 
 // Define variables
 var client;                 // The iPhone app
 var timer;                  // Used to time sending new samples
-var numberChannels = 3 ;    // The number of channels to simulate
+var numberChannels = 30;    // The number of channels to simulate
 var startTime = Date.now(); // Used to get time t for sine waves
-var frequency = 50;         // The frequency to send samples at
-
-// Setup Server
-var server = net.createServer( function(socket) {
-
-    // This is called when a client connects
-    console.log('connected client');
-    client = socket;
-    startTimer();
-
-    // When the client disconnects
-    client.on('end', function(){
-        console.log('client disconnected');
-        clearInterval(timer);
-        client = null;
-    });
-});
+var frequency = 100;        // The frequency to send samples at
+var samplesSent = 0;
 
 // Generate Random Data at regular intervals
 function startTimer() {
 
   // Mark the time when the signals begin
-  startTime = Date.now();
+  startTime   = Date.now();
+  samplesSent = 0;
 
   // Keep a reference to the timer to turn it off later
   timer = setInterval(function(){
@@ -51,16 +68,23 @@ function startTimer() {
     // Convert to a UTF8 JSON string
     var stringy = JSON.stringify(data);
 
-    // Send the measurenemts to the client
-    // Each message is marked with an end character \0
-    client.write(stringy);
-    client.write('\0');
+    // Send the measurenemts out to all of the clients
+    io.emit('data', stringy);
+    samplesSent += 1;
 
   // How often the timer fires is set to the sampling interval in ms
   }, 1000/frequency);
 }
 
-// Don't forget to start the server now that we're all setup.
-// The address and port will either be localhost on 8080 or
-// defined by the environment variable in the case of Heroku.
-server.listen(8080, '127.0.0.1');
+
+// Log the session statistics and disconnect the client
+function endSession() {
+  console.log('Session Statistics')
+
+  const t = (Date.now() - startTime)/1000;
+  console.log('time: ' + t + 's');
+  console.log('samples: ' + samplesSent);
+  console.log('freq: ' + samplesSent/t + '\n');
+
+  client.disconnect();
+}
