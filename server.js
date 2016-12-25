@@ -57,7 +57,7 @@ function startTimer() {
     // Sine waves for now
     var measurements = Array(numberChannels);
     for(var i = 0; i < numberChannels; i++) {
-      measurements[i] = Math.sin(2*Math.PI*t - i*(Math.PI/numberChannels)) + 0.25*Math.sin(2*Math.PI*3*t)
+      measurements[i] = Math.sin(2*Math.PI*5*t - i*(Math.PI/numberChannels)) + 0.25*Math.sin(2*Math.PI*3*t)
       + Math.random()*0.1;
     }
 
