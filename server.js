@@ -8,12 +8,6 @@ app.get('/', function(req, res){
   res.send('moppy megserver');
 });
 
-// This is necessary for using socket.io on Heroku
-// io.configure(function () {
-//   io.set("transports", ["xhr-polling"]);
-//   io.set("polling duration", 10);
-// });
-
 // This is called when a client connects
 io.on('connection', function(socket){
   console.log('connected client');
@@ -63,7 +57,8 @@ function startTimer() {
     // Sine waves for now
     var measurements = Array(numberChannels);
     for(var i = 0; i < numberChannels; i++) {
-      measurements[i] = Math.sin(2*Math.PI*t - i*(Math.PI/numberChannels));
+      measurements[i] = Math.sin(2*Math.PI*t - i*(Math.PI/numberChannels)) + 0.25*Math.sin(2*Math.PI*3*t)
+      + Math.rand()*0.1;
     }
 
     // Create a JavaScript object of data
