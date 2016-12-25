@@ -58,7 +58,7 @@ function startTimer() {
     var measurements = Array(numberChannels);
     for(var i = 0; i < numberChannels; i++) {
       measurements[i] = Math.sin(2*Math.PI*t - i*(Math.PI/numberChannels)) + 0.25*Math.sin(2*Math.PI*3*t)
-      + Math.rand()*0.1;
+      + Math.random()*0.1;
     }
 
     // Create a JavaScript object of data
