@@ -16,7 +16,7 @@ io.on('connection', function(socket){
   startTimer();
 
   // Make the session timeout after 10s automatically
-  const sessionTimeout = 3;
+  const sessionTimeout = 60;
   setTimeout(function(){
     timer.clearInterval();
     endSession();
