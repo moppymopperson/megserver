@@ -24,7 +24,7 @@ function countUp() {
   count++;
   console.log(count);
 
-  if (count >= 1000) {
+  if (count >= 10000) {
     nanoTimer.clearInterval();
 
     const time = (Date.now() - start)/1000;
@@ -34,6 +34,6 @@ function countUp() {
   }
 }
 
-nanoTimer.setInterval(countUp,'','1m', function(){
+nanoTimer.setInterval(countUp,'','0.1m', function(){
   console.log('callback');
 });

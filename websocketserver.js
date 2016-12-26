@@ -2,6 +2,7 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 8080;
+var NanoTimer = require('nanotimer');
 
 // When a user visits the website
 app.get('/', function(req, res){
@@ -15,9 +16,9 @@ io.on('connection', function(socket){
   startTimer();
 
   // Make the session timeout after 10s automatically
-  const sessionTimeout = 30;
+  const sessionTimeout = 3;
   setTimeout(function(){
-    clearInterval(timer);
+    timer.clearInterval();
     endSession();
   }, sessionTimeout*1000);
 });
@@ -33,12 +34,12 @@ http.listen(port, function(){
 });
 
 // Define variables
-var client;                 // The iPhone app
-var timer;                  // Used to time sending new samples
-var numberChannels = 8;    // The number of channels to simulate
-var startTime = Date.now(); // Used to get time t for sine waves
-var frequency = 1000;      // The frequency to send samples at
-var samplesSent = 0;
+var client;                   // The iPhone app
+var timer = new NanoTimer();  // Used to time sending new samples
+var numberChannels = 8;      // The number of channels to simulate
+var startTime = Date.now();   // Used to get time t for sine waves
+var frequency = 1000;         // The frequency to send samples at
+var samplesSent = 0;          // The number of samples sent so far
 
 // Generate Random Data at regular intervals
 function startTimer() {
@@ -48,7 +49,7 @@ function startTimer() {
   samplesSent = 0;
 
   // Keep a reference to the timer to turn it off later
-  timer = setInterval(function(){
+  timer.setInterval(function(){
 
     // Time t for calculating this set of samples
     const t = (Date.now() - startTime)/1000;
@@ -74,7 +75,7 @@ function startTimer() {
     samplesSent += 1;
 
   // How often the timer fires is set to the sampling interval in ms
-  }, 1000/frequency);
+  }, '', 1000/frequency + 'm');
 }
 
 
