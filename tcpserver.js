@@ -17,7 +17,6 @@ var server = net.createServer( function(socket) {
       endSession();
     }, sessionTimeout*1000);
 
-    // When the client disconnects
     client.on('end', function(){
         console.log('client disconnected');
         clearInterval(timer);
@@ -30,7 +29,7 @@ var client;                 // The iPhone app
 var timer = new NanoTimer();// Used to time sending new samples
 var numberChannels = 8 ;    // The number of channels to simulate
 var startTime = Date.now(); // Used to get time t for sine waves
-var frequency = 10000;      // The frequency to send samples at
+var frequency = 100;        // The frequency to send samples at
 
 // Generate Random Data at regular intervals
 function startTimer() {
