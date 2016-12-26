@@ -29,7 +29,7 @@ var client;                 // The iPhone app
 var timer = new NanoTimer();// Used to time sending new samples
 var numberChannels = 8 ;    // The number of channels to simulate
 var startTime = Date.now(); // Used to get time t for sine waves
-var frequency = 100;        // The frequency to send samples at
+var frequency = 1000;       // The frequency to send samples at
 
 // Generate Random Data at regular intervals
 function startTimer() {
@@ -83,5 +83,5 @@ function endSession() {
 // Don't forget to start the server now that we're all setup.
 // The address and port will either be localhost on 8080 or
 // defined by the environment variable in the case of Heroku.
-server.listen(8080, '127.0.0.1');
+server.listen(8080, '10.0.0.13');
 console.log('Began listening for clients');

@@ -36,9 +36,9 @@ http.listen(port, function(){
 // Define variables
 var client;                   // The iPhone app
 var timer = new NanoTimer();  // Used to time sending new samples
-var numberChannels = 8;       // The number of channels to simulate
+var numberChannels = 10;      // The number of channels to simulate
 var startTime = Date.now();   // Used to get time t for sine waves
-var frequency = 100;          // The frequency to send samples at
+var frequency = 30;           // The frequency to send samples at
 var samplesSent = 0;          // The number of samples sent so far
 
 // Generate Random Data at regular intervals
