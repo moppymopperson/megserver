@@ -15,7 +15,7 @@ io.on('connection', function(socket){
   startTimer();
 
   // Make the session timeout after 10s automatically
-  const sessionTimeout = 10;
+  const sessionTimeout = 30;
   setTimeout(function(){
     clearInterval(timer);
     endSession();
@@ -35,9 +35,9 @@ http.listen(port, function(){
 // Define variables
 var client;                 // The iPhone app
 var timer;                  // Used to time sending new samples
-var numberChannels = 30;    // The number of channels to simulate
+var numberChannels = 8;    // The number of channels to simulate
 var startTime = Date.now(); // Used to get time t for sine waves
-var frequency = 100;        // The frequency to send samples at
+var frequency = 1000;      // The frequency to send samples at
 var samplesSent = 0;
 
 // Generate Random Data at regular intervals
