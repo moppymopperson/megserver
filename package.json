@@ -4,7 +4,8 @@
   "description": "Streams simulated data arrays that emulate EEG or MEG type signals.",
   "main": "websocketserver.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "websocketserver.js"
   },
   "repository": {
     "type": "git",
