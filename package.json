@@ -2,7 +2,7 @@
   "name": "megserver",
   "version": "0.8.0",
   "description": "Streams simulated data arrays that emulate EEG or MEG type signals.",
-  "main": "server.js",
+  "main": "websocketserver.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
